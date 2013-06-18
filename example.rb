@@ -2,7 +2,6 @@
 
 require 'yaml'
 require 'tweetstream'
-require 'frappuccino'
 require_relative 'lib/westwind'
 
 auth = YAML::load_file("twitter_api_config.yml")
@@ -15,10 +14,9 @@ TweetStream.configure do |config|
   config.auth_method        = :oauth
 end
 
-@poem = Poem.new
-@poem.on_stanza {|stanza| puts stanza; puts ""}
+@poem = Poem.new {|stanza| puts stanza }
 
 words = ["is", "was", "and"]
 TweetStream::Client.new.track(*words) do |status|
-  @poem.compose(status.text)
+  @poem.compose_by(status.text)
 end

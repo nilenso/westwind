@@ -1,5 +1,5 @@
 module Frappuccino
-  class Multiplex < Stream
+  class Muxdemux < Stream
     def initialize(source, objs, &block)
       @objs = objs
       @callback = block

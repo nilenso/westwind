@@ -1,12 +1,11 @@
-class HalfCouplet
+class Rhyme
   def initialize(suffix)
     @suffix = suffix
     @previous = nil
   end
 
   def why_not(line)
-    return if line.strip.empty?
-    return unless line.end_with?(@suffix)
+    return unless line.rhymes?(@suffix)
     if @previous
       emit(Couplet.new(@previous, line))
       @previous = nil

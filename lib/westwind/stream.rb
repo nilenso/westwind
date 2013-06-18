@@ -9,8 +9,8 @@ module Frappuccino
       Partition.new(self, n)
     end
 
-    def multiplex(objs, &block)
-      Multiplex.new(self, objs, &block).demux
+    def muxdemux(objs, &block)
+      Muxdemux.new(self, objs, &block).demux
     end
 
   end

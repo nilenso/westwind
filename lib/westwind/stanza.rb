@@ -5,7 +5,8 @@ class Stanza
       couplets[0].first,
       couplets[1].first,
       couplets[0].second,
-      couplets[1].second
+      couplets[1].second,
+      " "
     ]
   end
 
