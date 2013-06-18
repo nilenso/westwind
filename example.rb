@@ -16,7 +16,7 @@ TweetStream.configure do |config|
 end
 
 @poem = Poem.new
-@poem.on_stanza {|stanza| puts stanza; puts "\n|"}
+@poem.on_stanza {|stanza| puts stanza; puts ""}
 
 words = ["is", "was", "and"]
 TweetStream::Client.new.track(*words) do |status|
