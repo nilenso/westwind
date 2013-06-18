@@ -20,11 +20,12 @@ end
 # 3. merged CSs #on_value => puts
 
 SUFFIXES = ['es', 'nd', 'ak', 'ck', 're', 'ar', 'pe', 'ne', 'ow', 'en', 'ay', 'me', 'ng', 'la', 'ab', 'an', 'at']
-@couplets = SUFFIXES.map {|s| CoupletStream.new(s) }
+@couplets = SUFFIXES.map {|s| Couplet.new(s) }
 @poem = Poem.new(@couplets)
 
-@output = Frappuccino::Stream.fold_merge(@couplets)
-@output.on_value {|value| puts value.inspect }
+@couplet_streams = @couplets.map {|c| Frappuccino::Stream.new(c) }
+@output = Frappuccino::Stream.fold_merge(@couplet_streams) # => [a,a] [b,b]
+@output.on_value {|value| puts value.join("\n"); puts "" }
 
 # words = ["wind", "commotion", "maenad", "zenith", "overgrown", "pumice",
 #   "cleave", "impulse", "tremble", "mankind", "trumpet", "suddenly", "hues"]

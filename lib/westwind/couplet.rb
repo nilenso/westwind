@@ -1,4 +1,4 @@
-class CoupletStream < Frappuccino::Stream
+class Couplet
   def initialize(suffix)
     @suffix = suffix
     @matched = []
@@ -10,5 +10,9 @@ class CoupletStream < Frappuccino::Stream
       emit(@matched)
       @matched.clear
     end
+  end
+
+  def clean
+    # remove newliens
   end
 end
