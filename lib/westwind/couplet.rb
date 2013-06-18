@@ -1,18 +1,10 @@
 class Couplet
-  def initialize(suffix)
-    @suffix = suffix
-    @matched = []
+
+  attr_reader :first, :second
+
+  def initialize(first, second)
+    @first = first
+    @second = second
   end
 
-  def why_not(line)
-    @matched << line if line.end_with?(@suffix)
-    if @matched.length > 1
-      emit(@matched)
-      @matched.clear
-    end
-  end
-
-  def clean
-    # remove newliens
-  end
 end

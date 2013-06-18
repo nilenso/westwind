@@ -1,7 +1,13 @@
-class Frappuccino::Stream
+module Frappuccino
+  class Stream
 
-  def self.fold_merge(streams)
-    streams.reduce {|c, s| Frappuccino::Stream.merge(c, s) }
+    def self.merge_all(streams)
+      streams.reduce {|c, s| Stream.merge(c, s) }
+    end
+
+    def partition(n)
+      Partition.new(self, n)
+    end
+
   end
-
 end
