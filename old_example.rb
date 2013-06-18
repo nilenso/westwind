@@ -31,8 +31,9 @@ end
 @stream = Frappuccino::TwootStream.new(@hose)
 @stream.on_value {|value| puts value }
 
-words = ["wind", "commotion", "maenad", "zenith", "overgrown", "pumice",
-  "cleave", "impulse", "tremble", "mankind", "trumpet", "suddenly", "hues"]
+# words = ["wind", "commotion", "maenad", "zenith", "overgrown", "pumice",
+#   "cleave", "impulse", "tremble", "mankind", "trumpet", "suddenly", "hues"]
+words = ["rain", "chicken"]
 TweetStream::Client.new.track(*words) do |status|
   @hose.twoot(status.text)
 end
