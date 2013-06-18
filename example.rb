@@ -15,30 +15,10 @@ TweetStream.configure do |config|
   config.auth_method        = :oauth
 end
 
-# 1. inbound stream (PoemStream) =>
-# 2. array of CoupletStreams
-# 3. merged CSs #on_value => puts
+@poem = Poem.new
+@poem.on_stanza {|stanza| puts stanza; puts "\n|"}
 
-SUFFIXES = ['es', 'nd', 'ak', 'ck', 're', 'ar', 'pe', 'ne', 'ow', 'en', 'ay', 'me', 'ng', 'la', 'ab', 'an', 'at']
-@couplets = SUFFIXES.map {|s| HalfCouplet.new(s) }
-@poem = Poem.new(@couplets)
-
-@couplet_streams = @couplets.map {|c| Frappuccino::Stream.new(c) }
-@output = Frappuccino::Stream.merge_all(@couplet_streams).
-  partition(2).
-  map {|stanza| [stanza[0].first, stanza[1].first, stanza[0].second, stanza[1].second]}
-
-@output.on_value {|value| puts value.join("\n"); puts "\n\n" }
-
-# words = ["wind", "commotion", "maenad", "zenith", "overgrown", "pumice",
-#   "cleave", "impulse", "tremble", "mankind", "trumpet", "suddenly", "hues"]
 words = ["is", "was", "and"]
 TweetStream::Client.new.track(*words) do |status|
   @poem.compose(status.text)
 end
-
-# cities = [ "-122.75", "36.8", "-121.75", "37.8",
-#   "-74", "40", "-73", "41" ]
-# TweetStream::Client.new.locations(*cities) do |status|
-#   @hose.twoot(status.text)
-# end
