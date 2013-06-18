@@ -3,7 +3,6 @@
 require 'yaml'
 require 'tweetstream'
 require 'frappuccino'
-require_relative 'lib/westwind'
 
 auth = YAML::load_file("twitter_api_config.yml")
 
@@ -15,15 +14,27 @@ TweetStream.configure do |config|
   config.auth_method        = :oauth
 end
 
-@couplets = Couplets.new
-@stream = Frappuccino::Stream.new(@couplets)
-@stream.on_value {|value| puts value.inspect }
+class Hose
+  def twoot(text)
+    emit(text)
+  end
+end
 
-# words = ["wind", "commotion", "maenad", "zenith", "overgrown", "pumice",
-#   "cleave", "impulse", "tremble", "mankind", "trumpet", "suddenly", "hues"]
-words = ["is", "was", "and"]
+class Frappuccino::TwootStream < Frappuccino::Stream
+  def juxt
+
+  end
+end
+
+
+@hose = Hose.new
+@stream = Frappuccino::TwootStream.new(@hose)
+@stream.on_value {|value| puts value }
+
+words = ["wind", "commotion", "maenad", "zenith", "overgrown", "pumice",
+  "cleave", "impulse", "tremble", "mankind", "trumpet", "suddenly", "hues"]
 TweetStream::Client.new.track(*words) do |status|
-  @couplets.compose_poetry(status.text)
+  @hose.twoot(status.text)
 end
 
 # cities = [ "-122.75", "36.8", "-121.75", "37.8",
