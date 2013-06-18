@@ -10,14 +10,21 @@ class Poem
       Frappuccino::Stream.new(c) #.map {|line| line }
     end
 
-    Frappuccino::Stream.merge_all(@couplet_streams).
+    # TODO: remove newlines / hashtags
+
+    #    Frappuccino::Stream.merge_all(@couplet_streams).
+
+    @raw = RawLine.new
+    Frappuccino::Stream.new(@raw).
+      select {|line| line.split(" ").length < 10 }.
+      multiplex(@half_couplets) {|hc, line| hc.why_not(line) }.
       partition(2).
       map {|couplets| Stanza.new(couplets) }.
       on_value {|stanza| @callback.call(stanza) }
   end
 
   def compose(line)
-    multiplex(line)
+    @raw.read(line)
   end
 
   def multiplex(line)
@@ -27,12 +34,6 @@ class Poem
 
   def on_stanza(&block)
     @callback = block
-  end
-
-  def clean
-    # TODO: remove newliens
-    # TODO: remove hashtags
-    # TODO: trim n words
   end
 
   # 1. inbound stream => raw
