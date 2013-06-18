@@ -31,8 +31,14 @@ end
 @stream = Frappuccino::TwootStream.new(@hose)
 @stream.on_value {|value| puts value }
 
-langs = ["ruby", "python", "clojure", "java", "c#", "haskell", "scheme", "lisp",
-  "smalltalk", "basic", "assembly", "mumps", "supercollider"]
-TweetStream::Client.new.track(*langs) do |status|
+words = ["wind", "commotion", "maenad", "zenith", "overgrown", "pumice",
+  "cleave", "impulse", "tremble", "mankind", "trumpet", "suddenly", "hues"]
+TweetStream::Client.new.track(*words) do |status|
   @hose.twoot(status.text)
 end
+
+# cities = [ "-122.75", "36.8", "-121.75", "37.8",
+#   "-74", "40", "-73", "41" ]
+# TweetStream::Client.new.locations(*cities) do |status|
+#   @hose.twoot(status.text)
+# end
