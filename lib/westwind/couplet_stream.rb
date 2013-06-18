@@ -1,4 +1,4 @@
-class Couplet
+class CoupletStream < Frappuccino::Stream
   def initialize(suffix)
     @suffix = suffix
     @matched = []
@@ -7,9 +7,8 @@ class Couplet
   def why_not(line)
     @matched << line if line.end_with?(@suffix)
     if @matched.length > 1
-      x = @matched.dup
+      emit(@matched)
       @matched.clear
-      x
     end
   end
 end

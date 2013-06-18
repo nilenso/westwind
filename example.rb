@@ -15,15 +15,22 @@ TweetStream.configure do |config|
   config.auth_method        = :oauth
 end
 
-@couplets = Couplets.new
-@stream = Frappuccino::Stream.new(@couplets)
-@stream.on_value {|value| puts value.inspect }
+# 1. inbound stream (PoemStream) =>
+# 2. array of CoupletStreams
+# 3. merged CSs #on_value => puts
+
+SUFFIXES = ['es', 'nd', 'ak', 'ck', 're', 'ar', 'pe', 'ne', 'ow', 'en', 'ay', 'me', 'ng', 'la', 'ab', 'an', 'at']
+@couplets = SUFFIXES.map {|s| CoupletStream.new(s) }
+@poem = Poem.new(@couplets)
+
+@output = Frappuccino::Stream.fold_merge(@couplets)
+@output.on_value {|value| puts value.inspect }
 
 # words = ["wind", "commotion", "maenad", "zenith", "overgrown", "pumice",
 #   "cleave", "impulse", "tremble", "mankind", "trumpet", "suddenly", "hues"]
 words = ["is", "was", "and"]
 TweetStream::Client.new.track(*words) do |status|
-  @couplets.compose_poetry(status.text)
+  @poem.compose(status.text)
 end
 
 # cities = [ "-122.75", "36.8", "-121.75", "37.8",
