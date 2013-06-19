@@ -1,4 +1,6 @@
 
+require 'frappuccino'
+
 require_relative 'westwind/muxdemux'
 require_relative 'westwind/partition'
 require_relative 'westwind/stream'
