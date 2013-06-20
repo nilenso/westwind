@@ -8,5 +8,8 @@ how-to?
 
     gem install bundler
     bundle
+    cp twitter_api_config.example.yml twitter_api_config.yml
+    vim twitter_api_config.yml
+    ruby example.rb
 
-`cp twitter_api_config.example.yml twitter_api_config.yml` and enter your API keys. Then run `ruby example.rb` to see some poems!
+...then sit back and wait for poems to arrive.
