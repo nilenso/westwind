@@ -1,3 +1,7 @@
+if ENV["RACK_ENV"] == "development"
+  require 'dotenv'
+  Dotenv.load
+end
 
 require 'frappuccino'
 require 'sinatra'

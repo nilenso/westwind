@@ -17,6 +17,6 @@ tmp
 _yardoc
 doc/
 
-twitter_api_config.yml
+.env
 .#*
 

@@ -6,6 +6,9 @@ GEM
     buftok (0.2.0)
     cookiejar (0.3.2)
     daemons (1.1.9)
+    dotenv (0.11.1)
+      dotenv-deployment (~> 0.0.2)
+    dotenv-deployment (0.0.2)
     em-http-request (1.1.2)
       addressable (>= 2.3.4)
       cookiejar
@@ -78,6 +81,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  dotenv
   frappuccino
   sinatra
   sinatra-contrib
