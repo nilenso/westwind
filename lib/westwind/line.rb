@@ -26,8 +26,10 @@ class Line
   end
 
   def no_ugly_words?
-    ["http:", "bitch", "shit", "fuck", "cunt"].reduce(true) do |is_clean, word|
+    ["http", ".com", ".net", "cunt", "lol", ":)", "&lt", "hmm", "haha", ":-)", ":)", "srsly", "&gt;", "&amp;", "xxx",
+     "!!", ";)", "ooo", "aaa", "nnn", "ccc", "ur ", "ma " "wtf", ":/", "sss", "%", ':(', ':d', 'yeahh', 'wth','yyy', 'eee', 'fml',
+     "tbh", "tbd", "??", "?!", '___', "idk", "//", "smh", "lmao"
+    ].reduce(true) do |is_clean, word|
       is_clean && !@text.include?(word)
-    end
-  end
+    end  end
 end
