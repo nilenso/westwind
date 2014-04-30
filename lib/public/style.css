@@ -1,7 +1,16 @@
-.poem {
+.container {
   width: 450px;
   margin: 0 auto;
 }
+
+.title {
+  text-align: center;
+}
+
+.poem {
+  margin-top: 45px;
+}
+
 .stanza {
   margin: 15px;
 }
