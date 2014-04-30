@@ -1,4 +1,5 @@
 class Stanza
+  attr_reader :lines
 
   def initialize(couplets)
     @lines = [

@@ -1,8 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'sinatra'
+gem 'sinatra-contrib'
 gem 'frappuccino'
-
-group :example do
-  gem 'tweetstream'
-end
-
+gem 'thin'
+gem 'tweetstream'
