@@ -1,0 +1,11 @@
+.poem {
+  width: 450px;
+  margin: 0 auto;
+}
+.stanza {
+  margin: 15px;
+}
+
+.line {
+  margin: 0px;
+}
