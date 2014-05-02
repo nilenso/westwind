@@ -28,8 +28,9 @@ class Line
   def no_ugly_words?
     ["http", ".com", ".net", "cunt", "lol", ":)", "&lt", "hmm", "haha", ":-)", ":)", "srsly", "&gt;", "&amp;", "xxx",
      "!!", ";)", "ooo", "aaa", "nnn", "ccc", "ur ", "ma " "wtf", ":/", "sss", "%", ':(', ':d', 'yeahh', 'wth','yyy', 'eee', 'fml',
-     "tbh", "tbd", "??", "?!", '___', "idk", "//", "smh", "lmao"
+     "tbh", "tbd", "??", "?!", '___', "idk", "//", "smh", "lmao", "shit"
     ].reduce(true) do |is_clean, word|
       is_clean && !@text.include?(word)
-    end  end
+    end
+  end
 end
